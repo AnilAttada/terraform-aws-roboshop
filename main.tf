@@ -1,7 +1,7 @@
 resource "aws_lb_target_group" "main" {
   name     = "${var.project}-${var.environment}-${var.component}"
   port     = local.tg_port
-  protocol = "TCP"
+  protocol = "HTTP"
   vpc_id   = local.vpc_id
   deregistration_delay = 120
   health_check {
@@ -85,7 +85,7 @@ resource "terraform_data" "main_delete" {
 
 resource "aws_launch_template" "main" {
   name = "${var.project}-${var.environment}-${var.component}"
-  image_id = "aws_ami_from_instance.main.id"
+  image_id = aws_ami_from_instance.main.id
   instance_initiated_shutdown_behavior = "terminate"
   instance_type = var.instance_type
   vpc_security_group_ids = [local.sg_id]
