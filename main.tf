@@ -83,7 +83,7 @@ resource "terraform_data" "main_delete" {
   depends_on = [ aws_ami_from_instance.main]
 }
 
-resource "aws_launch_template" "example" {
+resource "aws_launch_template" "main" {
   name = "${var.project}-${var.environment}-${var.component}"
   image_id = "aws_ami_from_instance.main.id"
   instance_initiated_shutdown_behavior = "terminate"
