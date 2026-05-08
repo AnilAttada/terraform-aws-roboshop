@@ -112,7 +112,6 @@ resource "aws_launch_template" "main" {
     )
   }
 
-
   tags = merge(
     local.common_tags,
     {
