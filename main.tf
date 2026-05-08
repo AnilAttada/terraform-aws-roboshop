@@ -134,7 +134,7 @@ resource "aws_autoscaling_group" "main" {
 
   launch_template {
     id      = aws_launch_template.main.id
-    version = aws_ami_from_instance.main.latest_version
+    version = aws_launch_template.main.latest_version
   }
   instance_refresh {
     strategy = "Rolling"
