@@ -1,7 +1,6 @@
 locals {
     tg_port = "${var.component}" == "frontend" ? 80 : 8080
     health_check_path = "${var.component}" == "frontend" ? "/" : "/health"
-    alb_listener_arn = "${var.component}" == "frontend" ? "local.frontend_alb_listener_arn" : "local.backend_alb_listener_arn"
     rule_header_url = "${var.component}" == "frontend" ? "${var.environment}.${var.zone_name}" : "${var.component}.backend-${var.environment}.${var.zone_name}"
 
     ami_id = data.aws_ami.joindevops.id
@@ -13,6 +12,7 @@ locals {
 
     frontend_alb_listener_arn = data.aws_ssm_parameter.frontend_alb_listener_arn.value
     backend_alb_listener_arn = data.aws_ssm_parameter.backend_alb_listener_arn.value
+    alb_listener_arn = "${var.component}" == "frontend" ? "local.frontend_alb_listener_arn" : "local.backend_alb_listener_arn"
 
     common_tags = {
         Project = var.project
